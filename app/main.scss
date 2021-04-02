@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Press+Start+2P&display=swap');
+
+$baseFont: "Comfortaa", serif;
+$secondaryFont: "Press Start 2P", serif;
+$mainTransitionSpeed: .3s; 
+
+
+body {
+    background: rgb(63,237,251);
+    background: radial-gradient(circle, rgba(63,237,251,1) 0%, rgba(238,70,252,1) 100%);
+    font-family: $baseFont;
+    font-size: 19px;
+}
+
+button {
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+*:focus {
+    outline: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#wordSaver {
+    display: flex; 
+    justify-content: center;
+    margin: 50px auto;
+    width: 50vw;
+    height: 40vh;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    align-items: baseline;
+}
+
+#wordInput, 
+#translateInput {
+    min-width: 40%;
+    margin: 15px;
+    font-size: 20px;
+}
+
+#wordInput, 
+#translateInput,
+#saver {
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: $mainTransitionSpeed;
+    border: none; 
+    height: 50px;
+}
+
+#wordInput, 
+#translateInput {
+    &:hover, &:focus {
+        border: none; 
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 5px  rgba(179, 36, 192, 0.672);
+    }
+}
+
+#saver {
+    border: none;
+    background: rgb(15,130,204);
+    background: linear-gradient(90deg, rgba(15,130,204,1) 25%, rgba(239,0,255,1) 100%);
+    color: #fff;
+    transition: $mainTransitionSpeed;
+    margin-right: 20px;
+
+    &:hover, &:focus {
+        outline: none;
+        transform: scale(1.05);
+        box-shadow: 0px 0px 10px 5px  rgb(86, 202, 255);
+    }
+}
+
+#gameStart {
+    margin: 0 auto;
+    display: block;
+    width: 175px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-family: $secondaryFont;
+    font-size: 25px;
+    letter-spacing: 10px;
+    background: linear-gradient(90deg, rgba(239,0,255,1) 25%, rgba(15,130,204,1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 100;
+    animation: startGrow 1s 1s;
+    transition: $mainTransitionSpeed;
+
+    &:hover, &:focus {
+        transform: scale(1.3);
+    }
+}
+
+@keyframes startGrow {
+    50% {transform: scale(1.3);}
+    100% {transform: scale(1);}
+}
+
+#game {
+    padding-top: 20px;
+}
+
+.timer {
+    width: 100vw;
+    height: 15px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 15px;
+    animation: timer 300s linear forwards;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes timer {
+    0%{
+        transform: translateX(-100%);
+        background-color: rgb(0, 255, 0);
+    }
+
+    50% {
+        background-color: rgb(255, 255, 0);
+    }
+
+    100% {
+        transform: translateX(0%);
+        background-color: rgb(255, 0, 0);
+    }
+}
+
+#game__field {
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px auto;
+    padding: 35px;
+    width: 500px;
+    border-radius: 15px;
+}
+
+.game__translate {
+    margin: 20px 0px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 20px;
+    width: 325px;
+    text-align: center;
+}
+
+.game__submit {
+    border: none;
+    background: rgb(15,130,204);
+    background: linear-gradient(90deg, rgba(15,130,204,1) 25%, rgba(239,0,255,1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#postGame {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 30px;
+
+    button {
+        height: 40px;
+        width: 300px;
+        border: none; 
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: $mainTransitionSpeed;
+
+        &:hover, &:focus {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.results__number {
+    text-align: center;
+    font-size: 40px;
+    margin: unset;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.postGame__buttons {
+    display: flex;
+    justify-content: space-between;
+}

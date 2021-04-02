@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <title>Memorizer</title>
+
+</head>
+<body>
+    <section id="preGame" class="">
+        <h1>Week 1</h1>
+        <form id="wordSaver">
+            <input type="text" name="wordInput" id="wordInput" placeholder="Input the english word" required>
+            <input type="text" name="translateInput" id="translateInput" placeholder="Input translate" required>
+            <button type="submit" id="saver">SAVE WORD IN THE STORAGE</button>
+            <span class="words-counter">Words in storage: 0</span>
+        </form>
+        <button id="gameStart">START</button>
+    </section>
+
+    <section id="game" class="hidden">
+        <div class="timer"></div>
+        <form id="game__field">
+            <div class="game__word">value</div>
+            <input type="text" class="game__translate" required>
+            <button type="submit" class="game__submit">check</button>
+        </form>
+    </section>
+
+    <section id="postGame" class="hidden">
+        <p class="results__number">value</p>
+        <div class="results">
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+            <span class="results__words">word / слово</span>
+        </div>
+        <div class="postGame__buttons">
+            <button type="reset" class="game__reset">reset all words</button>
+            <button type="reset" class="game__restart">restart</button>
+        </div>
+    </section>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
