@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playersTranslate = document.querySelector('.game__translate')
 
     const addOne = () => {
-        let counter = -1
+        let counter = 0
 
         return () => {
             return counter += 1 
@@ -65,16 +65,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const nextItem = addOne()
     
+    const postGame = document.getElementById('postGame')
+    const results = document.querySelector('.results')
     const checkoutArr = [] //array for inputed words
+
+    const span = document.createElement('span')
 
     check.addEventListener('submit', (e) => {
         e.preventDefault()
 
-        checkoutArr.push(playersTranslate.value)
+        const span = document.createElement('span')
+        span.textContent = playersTranslate.value
+        results.insertAdjacentElement('afterbegin', span)
+        
         gameWord.innerHTML = gameArr[nextItem()].word
         console.log(gameArr)
         check.reset()
+
+
+        setTimeout(() => {
+            hide(game)
+            show(postGame)
+            window.alert('GAME OVER')
+        }, 3000)
     })
      
+    
+
 
 })
