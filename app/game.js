@@ -3,30 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordInput = document.getElementById('wordInput')
     const translateInput = document.getElementById('translateInput')
     const wordSaver = document.getElementById('wordSaver')
-    const saver = document.getElementById('saver')
     const wordCounter = document.querySelector('.words-counter')
 
     let gameArr = [                                 // test array, need to be empty 
-        {word: 'word a', translate: 'translate a'},
-        {word: 'word b', translate: 'translate b'},
-        {word: 'word c', translate: 'translate c'},
-        {word: 'word d', translate: 'translate d'},
-        {word: 'word e', translate: 'translate e'},
-        {word: 'word f', translate: 'translate f'}
+        // {word: 'merc', translate: 'наемник'},
+        // {word: 'tamer', translate: 'укротитель'},
+        // {word: 'pine', translate: 'сосна'},
+        // {word: 'womit', translate: 'рвота'},
+        // {word: 'sour', translate: 'кислый'},
+        // {word: 'persist', translate: 'сопротивляться'},
+        // {word: 'seasoning', translate: 'приправа'},
+        // {word: 'convinience', translate: 'удобство'},
+        // {word: 'flacid', translate: 'вялый'},
+        // {word: 'overwhelming', translate: 'подавляющий'},
+        // {word: 'curious', translate: 'любопытный'},
+        // {word: 'morgage', translate: 'ипотека'},
+        // {word: 'binge', translate: 'выпивка'},
+        {word: 'interrogation', translate: 'допрос'},
+        {word: 'virgule', translate: 'косая черта'},
     ]
-
-    
-
-    wordSaver.addEventListener('submit', (e) => {
-        e.preventDefault()
-
-        gameArr.push({word: wordInput.value, translate: translateInput.value})
-        console.log(gameArr)
-
-
-        wordSaver.reset()
-        wordCounter.textContent = `Words in storage: ${gameArr.length}`
-    })    
 
     const arrayShuffler = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -34,8 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
             let arr = [array[i], array[s]] = [array[s], array[i]] 
         } 
     }   
-
     arrayShuffler(gameArr)
+
+    wordSaver.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+
+        gameArr.push({word: wordInput.value, translate: translateInput.value})
+
+        wordSaver.reset()
+        wordCounter.textContent = `Words in storage: ${gameArr.length}`
+    })    
+    
 
     const gameStart = document.getElementById('gameStart')
     const preGame = document.getElementById('preGame')
@@ -50,44 +55,60 @@ document.addEventListener('DOMContentLoaded', () => {
         hide(preGame)
         show(game)
         gameWord.innerHTML = gameArr[0].word
+
+        setTimeout(() => {
+            hide(game)
+            show(postGame)
+            alert('GAME OVER')
+        }, 50000)
     })
 
 
     const check = document.getElementById('game__field')
     const playersTranslate = document.querySelector('.game__translate')
 
-    const addOne = () => {
+    const postGame = document.getElementById('postGame')
+    const results = document.querySelector('.results')
+
+    let addOne = () => {
         let counter = 0
 
         return () => {
-            return counter += 1 
+            return counter+=1
         }
     }
-    const nextItem = addOne()
+
+    const incrementWord = addOne()
+    const incrementTranslate = addOne()
+    const yourTranslate = addOne()
+    const valueCounter = addOne()
+    const hiddenCounter = addOne()
+
+    const value = document.querySelector('.results__number')
     
-    const postGame = document.getElementById('postGame')
-    const results = document.querySelector('.results')
-    const checkoutArr = [] //array for inputed words
-
-    const span = document.createElement('span')
-
     check.addEventListener('submit', (e) => {
         e.preventDefault()
 
-        const span = document.createElement('span')
-        span.textContent = playersTranslate.value
-        results.insertAdjacentElement('afterbegin', span)
+        const nextWord = gameArr[(incrementWord() - 1)].word
+        const nextTranslate = gameArr[(incrementTranslate() - 1)].translate
         
-        gameWord.innerHTML = gameArr[nextItem()].word
-        console.log(gameArr)
-        check.reset()
-
-
-        setTimeout(() => {
+        const span = document.createElement('span')
+        span.textContent = `${nextWord} / ${nextTranslate} VS ${playersTranslate.value}`
+        results.insertAdjacentElement('beforeend', span)
+        
+        if (gameArr.length === hiddenCounter()) {
             hide(game)
             show(postGame)
-            window.alert('GAME OVER')
-        }, 3000)
+            alert('GAME OVER')
+        } else {
+            gameWord.innerHTML = gameArr[yourTranslate()].word 
+        }
+
+        if (nextTranslate.trim().toLowerCase() === playersTranslate.value.trim().toLowerCase()) {
+            value.textContent = `You have ${valueCounter()} right answers`
+        } 
+
+        check.reset()
     })
      
     
