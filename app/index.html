@@ -11,15 +11,25 @@
 
 </head>
 <body>
-    <section id="preGame" class="">
-        <h1>Week 1</h1>
+    <section id="preGame">
+        <h1>Memorizer</h1>
         <form id="wordSaver">
             <input type="text" name="wordInput" id="wordInput" placeholder="Input the english word" required>
             <input type="text" name="translateInput" id="translateInput" placeholder="Input translate" required>
             <button type="submit" id="saver">SAVE WORD IN THE STORAGE</button>
-            <span class="words-counter">Words in storage: 0</span>
+            <span class="words-counter">Words in storage: </span>
         </form>
-        <button id="gameStart">START</button>
+        <form id="select__form">
+            <div class="select__wrapper">
+                <input type="radio" required name="dificultySelector" id="eazy" class="selector">
+                <label for="eazy">eazy</label>
+                <input type="radio" required name="dificultySelector" id="normal" class="selector">
+                <label for="normal">normal</label>
+                <input type="radio" required name="dificultySelector" id="hard" class="selector">
+                <label for="hard">hard</label>
+            </div>
+            <button type="submit" id="gameStart">START</button>
+        </form>
     </section>
 
     <section id="game" class="hidden">
@@ -35,11 +45,11 @@
         <p class="results__number">0 right answers</p>
         <div class="results"></div>
         <div class="postGame__buttons">
-            <button type="reset" class="game__reset">reset all words</button>
-            <button type="reset" class="game__restart">restart</button>
+            <button class="game__reset">reset my storage</button>
+            <button class="game__backToMain">main menu</button>
+            <button class="game__restart">restart</button>
         </div>
     </section>
-
     <script src="js/game.js"></script>
 </body>
 </html>

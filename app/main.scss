@@ -82,6 +82,29 @@ h1 {
     }
 }
 
+#select__form {
+    display: flex; 
+    align-items: center;
+    margin: 50px auto;
+    width: 50vw;
+    height: 10vh;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+}
+
+.select__wrapper {
+    margin: 10px auto;
+
+    label:not(:last-child) {
+        margin-right: 7px;
+    }
+
+    label, input {
+        cursor: pointer;
+    }
+}
+
 #gameStart {
     margin: 0 auto;
     display: block;
@@ -197,10 +220,49 @@ h1 {
 }
 
 .results {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-    margin: 40px 0;
+    margin: 40px auto;
+   
+    p {
+        display: grid;
+        grid-template-columns: 1fr 50px 1fr;
+        margin: 0px auto;
+        width: max-content;
+
+        span {
+            border-top: 2px solid rgba(255,255,255,.0);
+            border-bottom: 2px solid rgba(255,255,255,.0);
+            width: max-content;
+            padding: 9px;
+        }
+
+        &:hover {
+
+            span {
+                border-top: 2px solid rgba(255,255,255,.5);
+                border-bottom: 2px solid rgba(255,255,255,.5);
+            }
+
+            :first-child {
+                border-left: 2px solid rgba(255,255,255,.5);
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            :last-child {
+                border-right: 2px solid rgba(255,255,255,.5);
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+        }
+
+        :nth-child(2) {
+            align-self: center;
+            width: auto;
+            border-left: unset;
+            border-right: unset;
+        }
+        
+    }
 }
 
 .postGame__buttons {
