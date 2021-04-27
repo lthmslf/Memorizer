@@ -6,22 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordCounter = document.querySelector('.words-counter')
 
     let gameArr = [                                 // test array
-        {word: 'merc', translate: 'наемник'},
-        {word: 'tamer', translate: 'укротитель'},
-        {word: 'pine', translate: 'сосна'},
-        {word: 'womit', translate: 'рвота'},
-        {word: 'sour', translate: 'кислый'},
-        {word: 'persist', translate: 'сопротивляться'},
-        {word: 'seasoning', translate: 'приправа'},
-        {word: 'convinience', translate: 'удобство'},
-        {word: 'flacid', translate: 'вялый'},
-        {word: 'overwhelming', translate: 'подавляющий'},
-        {word: 'curious', translate: 'любопытный'},
-        {word: 'morgage', translate: 'ипотека'},
-        {word: 'binge', translate: 'выпивка'},
-        {word: 'interrogation', translate: 'допрос'},
-        {word: 'virgule', translate: 'косая черта'},
+        // {word: 'merc', translate: 'наемник'},
+        // {word: 'tamer', translate: 'укротитель'},
+        // {word: 'pine', translate: 'сосна'},
+        // {word: 'womit', translate: 'рвота'},
+        // {word: 'sour', translate: 'кислый'},
+        // {word: 'persist', translate: 'сопротивляться'},
+        // {word: 'seasoning', translate: 'приправа'},
+        // {word: 'convinience', translate: 'удобство'},
+        // {word: 'flacid', translate: 'вялый'},
+        // {word: 'overwhelming', translate: 'подавляющий'},
+        // {word: 'curious', translate: 'любопытный'},
+        // {word: 'morgage', translate: 'ипотека'},
+        // {word: 'binge', translate: 'выпивка'},
+        // {word: 'interrogation', translate: 'допрос'},
+        // {word: 'virgule', translate: 'косая черта'},
     ]
+
+    
 
     const arrayShuffler = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -29,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let arr = [array[i], array[s]] = [array[s], array[i]] 
         } 
     }   
-    arrayShuffler(gameArr)
 
     wordSaver.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -46,40 +47,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameWord = document.querySelector('.game__word')
     const difficultySelect = document.getElementById('select__form')
     const selectors = document.querySelectorAll('.selector')
+    const timeLine = document.querySelector('.timer')
     
-
+    
     const hide = (element) => element.classList.add('hidden')
     const show = (element) => element.classList.remove('hidden')
+    
+    let timer 
 
     difficultySelect.addEventListener('submit', (e) => {
         e.preventDefault()
         
-        hide(preGame)
-        show(game)
-        gameWord.innerHTML = gameArr[0].word
+        if (gameArr.length > 0) {
+            hide(preGame)
+            show(game)
+            arrayShuffler(gameArr)
+            gameWord.innerHTML = gameArr[0].word
 
-        if (selectors[0].checked === true) {
-            const timer = setTimeout(() => {
-                hide(game)
-                show(postGame)
-                alert('GAME OVER')
-            }, (gameArr.length * 9000))
-
-        } else if (selectors[1].checked === true) {
-            const timer = setTimeout(() => {
-                hide(game)
-                show(postGame)
-                alert('GAME OVER')
-            }, (gameArr.length * 6000))
-
-        } else if (selectors[2].checked === true) {
-            const timer = setTimeout(() => {
-                hide(game)
-                show(postGame)
-                alert('GAME OVER')
-            }, (gameArr.length * 3000))
-        } 
-
+            if (selectors[0].checked === true) {
+                timeLine.style.animation = `timer ${gameArr.length * 9}s linear forwards`
+    
+                timer = setTimeout(() => {
+                    hide(game)
+                    show(postGame)
+                    alert('GAME OVER')
+                }, (gameArr.length * 9000))
+    
+            } else if (selectors[1].checked === true) {
+                timeLine.style.animation = `timer ${gameArr.length * 6}s linear forwards`
+    
+                timer = setTimeout(() => {
+                    hide(game)
+                    show(postGame)
+                    alert('GAME OVER')
+                }, (gameArr.length * 6000))
+    
+            } else if (selectors[2].checked === true) {
+                timeLine.style.animation = `timer ${gameArr.length * 3}s linear forwards`
+    
+                timer = setTimeout(() => {
+                    hide(game)
+                    show(postGame)
+                    alert('GAME OVER')
+                }, (gameArr.length * 3000))
+            } 
+        }
     })
 
 
@@ -152,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reset.addEventListener('click', () => {
         gameArr.length = 0
+
         alert('the storage has been reseted')
     })
 
@@ -166,19 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         arrayShuffler(gameArr)
         
         results.innerHTML = ''
-    })
-
-    const restart = document.querySelector('.game__restart')
-
-    restart.addEventListener('click', () => {
-        show(game)
-        hide(postGame)
-        nextPair.reset()
-        rightCounter.reset()
-        check.reset()
-        arrayShuffler(gameArr)
-        
-        results.innerHTML = ''
+        wordCounter.textContent = `Words in storage: ${gameArr.length}`
+        gameWord.innerHTML = gameArr[0].word 
     })
 
 })
